@@ -1,10 +1,8 @@
 
 # BEGIN WordPress
-# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
-# dynamically generated, and should only be modified via WordPress filters.
-# Any changes to the directives between these markers will be overwritten.
-
-
+# Les directives (lignes) entre « BEGIN WordPress » et « END WordPress » sont générées
+# dynamiquement, et doivent être modifiées uniquement via les filtres WordPress.
+# Toute modification des directives situées entre ces marqueurs sera surchargée.
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -16,3 +14,16 @@ RewriteRule . /index.php [L]
 </IfModule>
 
 # END WordPress
+
+#----------------------------------------------------------------cp:ppd
+# Section managed by cPanel: Password Protected Directories     -cp:ppd
+# - Do not edit this section of the htaccess file!              -cp:ppd
+#----------------------------------------------------------------cp:ppd
+# DÉSACTIVÉ EN LOCAL - Décommentez ces lignes pour activer en production :
+# AuthType Basic
+# AuthName "Protected 'elevage-du-pouey.valentin-fortin.pro'"
+# AuthUserFile "/home/oyyx5826/.htpasswds/elevage-du-pouey.valentin-fortin.pro/passwd"
+# Require valid-user
+#----------------------------------------------------------------cp:ppd
+# End section managed by cPanel: Password Protected Directories -cp:ppd
+#----------------------------------------------------------------cp:ppd
