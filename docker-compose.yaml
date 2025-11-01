@@ -29,6 +29,9 @@ services:
     volumes:
       - "./:/var/www/html"
       - "./php.ini:/usr/local/etc/php/conf.d/custom.ini"
+      - "./docker-init.sh:/docker-init.sh"
+    entrypoint: ["/bin/bash", "/docker-init.sh"]
+    command: ["apache2-foreground"]
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

@@ -80,6 +80,13 @@ Cette commande va créer et démarrer les conteneurs suivants :
 - `phpmyadmin` : Interface phpMyAdmin (accessible sur http://localhost:8080)
 - `wp-cli` : Conteneur wp-cli pour les commandes WordPress
 
+**Note** : Le conteneur WordPress exécute automatiquement un script d'initialisation (`docker-init.sh`) au démarrage qui :
+- Crée automatiquement les dossiers nécessaires (Elementor CSS/JS, LiteSpeed, cache)
+- Corrige les permissions des dossiers critiques pour éviter les erreurs d'écriture
+- S'assure que WordPress peut écrire dans tous les dossiers nécessaires
+
+Ce script s'exécute à chaque démarrage du conteneur, garantissant que les permissions sont toujours correctes, même après un redémarrage.
+
 ### Import du dump SQL
 
 Le projet contient un fichier `dump.sql` à la racine du projet. Pour l'importer dans la base de données Docker :
@@ -147,6 +154,25 @@ Une fois les conteneurs démarrés et le dump SQL importé :
 - **phpMyAdmin** : http://localhost:8080
   - Utilisateur : valeur de `MYSQL_USER` dans votre `.env`
   - Mot de passe : valeur de `MYSQL_PASSWORD` dans votre `.env`
+
+### Dépannage
+
+#### Vérifier les logs d'initialisation
+
+Si vous rencontrez des problèmes de permissions, vous pouvez vérifier les logs du script d'initialisation :
+
+```bash
+docker compose logs wordpress | grep "Docker Init"
+```
+
+#### Corriger manuellement les permissions
+
+Si nécessaire, vous pouvez corriger manuellement les permissions :
+
+```bash
+docker compose exec wordpress chown -R www-data:www-data /var/www/html/wp-content/uploads
+docker compose exec wordpress chmod -R 775 /var/www/html/wp-content/uploads
+```
 
 ### Arrêt des conteneurs
 
