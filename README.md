@@ -1,9 +1,6 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <a target="_blank" href="https://github.com/DevSkyLex/ecurie-du-pouey-wordpress">
-    <img src="https://raw.githubusercontent.com/DevSkyLex/ecurie-du-pouey-wordpress/main/wp-content/login_logo.png" width="40%" alt="Logo Élevage du Pouey">
-  </a>
   <h3 align="center"></h3>
   
   <p align="center">
