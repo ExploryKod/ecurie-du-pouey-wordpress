@@ -92,13 +92,7 @@ Le projet contient un fichier `dump.sql` à la racine du projet. Pour l'importer
 docker compose exec -T db mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE} < dump.sql
 ```
 
-Ou si vous préférez utiliser le fichier `u872521440_CtWrd.sql` :
-
-```bash
-docker compose exec -T db mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} ${MYSQL_DATABASE} < u872521440_CtWrd.sql
-```
-
-**Note** : Si vous utilisez un dump de production, vous devrez mettre à jour les URLs dans la base de données (voir section suivante).
+**Note** : Si vous utilisez ce dump, vous devrez mettre à jour les URLs dans la base de données avec wp-cli (voir section suivante).
 
 ### Mise à jour des URLs avec wp-cli
 
@@ -248,7 +242,7 @@ Un dump de la base de données est fourni avec le projet. Pour l'importer :
 mysql -u root -p -e "CREATE DATABASE <nom_base_de_donnees>;"
 ```
 
-2. Importez le fichier de **dump SQL** dans votre base de données nouvellement créée. Le fichier de dump se trouve à la racine du projet (`dump.sql` ou `u872521440_CtWrd.sql`) :
+2. Importez le fichier de **dump SQL** dans votre base de données nouvellement créée. Le fichier de dump se trouve à la racine du projet (`dump.sql`) :
 
 ```bash
 mysql -u <utilisateur> -p <nom_base_de_donnees> < dump.sql
