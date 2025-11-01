@@ -24,6 +24,47 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 /* Name=Default */
 
+/* Custom Header Styles - UNIQUEMENT sur la page d'accueil */
+body.home #site-header.site-header.dynamic-header {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background-color: transparent !important;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Header scrolled state - fond blanc avec texte sombre */
+body.home #site-header.site-header.dynamic-header.header-scrolled {
+    background-color: #ffffff !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.home #site-header.site-header.dynamic-header.header-scrolled .site-navigation ul.menu li a {
+    color: #0C1B26 !important;
+}
+
+body.home #site-header.site-header.dynamic-header.header-scrolled .site-navigation-toggle {
+    color: #0C1B26 !important;
+}
+
+/* Navigation links transition */
+body.home #site-header.site-header.dynamic-header .site-navigation ul.menu li a {
+    transition: color 0.3s ease;
+}
+
+/* Toggle button transition */
+body.home #site-header.site-header.dynamic-header .site-navigation-toggle {
+    transition: color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    body.home #site-header.site-header.dynamic-header {
+        padding: 1rem 0;
+    }
+}
+
 /* Custom style - Horse widget */
 
 .horses-list {

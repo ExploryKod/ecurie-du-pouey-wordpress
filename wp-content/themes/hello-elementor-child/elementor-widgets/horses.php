@@ -91,9 +91,24 @@ class Horses extends Widget_Base {
                 $horse_link = get_permalink();
                 $star_number = get_field('nombre_etoiles');
 
+                // Gérer le champ image qui peut être un tableau ou une URL
+                if (is_array($horse_image) && isset($horse_image['url'])) {
+                    $horse_image = $horse_image['url'];
+                } elseif (is_object($horse_image) && isset($horse_image->url)) {
+                    $horse_image = $horse_image->url;
+                }
                 $horse_image = $horse_image ?: 'https://images.pexels.com/photos/635499/pexels-photo-635499.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
+                // S'assurer que c'est une chaîne
+                $horse_image = is_scalar($horse_image) ? (string) $horse_image : 'https://images.pexels.com/photos/635499/pexels-photo-635499.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
+                
+                // Convertir en string si nécessaire
+                $horse_name = is_array($horse_name) ? (isset($horse_name['label']) ? $horse_name['label'] : '') : $horse_name;
                 $horse_name = $horse_name ?: get_the_title();
+                $horse_name = is_scalar($horse_name) ? (string) $horse_name : '';
+                
+                $button_text = is_array($button_text) ? (isset($button_text['label']) ? $button_text['label'] : '') : $button_text;
                 $button_text = $button_text ?: 'Découvrir';
+                $button_text = is_scalar($button_text) ? (string) $button_text : 'Découvrir';
 
                 $horse_race = get_field('race');
                 $horse_age = get_field('age_category');
@@ -102,6 +117,21 @@ class Horses extends Widget_Base {
                 $horse_hair = get_field('couleur_de_la_robe');
                 $horse_price = get_field('prix');
                 $sportRace = get_field('sport_race');
+
+                // Convertir les valeurs qui peuvent être des tableaux en chaînes
+                $horse_race = is_array($horse_race) ? (isset($horse_race['label']) ? $horse_race['label'] : (isset($horse_race['value']) ? $horse_race['value'] : '')) : $horse_race;
+                $horse_age = is_array($horse_age) ? (isset($horse_age['label']) ? $horse_age['label'] : (isset($horse_age['value']) ? $horse_age['value'] : '')) : $horse_age;
+                $horse_sex = is_array($horse_sex) ? (isset($horse_sex['label']) ? $horse_sex['label'] : (isset($horse_sex['value']) ? $horse_sex['value'] : '')) : $horse_sex;
+                $horse_hair = is_array($horse_hair) ? (isset($horse_hair['label']) ? $horse_hair['label'] : (isset($horse_hair['value']) ? $horse_hair['value'] : '')) : $horse_hair;
+                $horse_price = is_array($horse_price) ? (isset($horse_price['label']) ? $horse_price['label'] : (isset($horse_price['value']) ? $horse_price['value'] : '')) : $horse_price;
+                
+                // Convertir en string pour éviter les erreurs
+                $horse_race = is_scalar($horse_race) ? (string) $horse_race : '';
+                $horse_age = is_scalar($horse_age) ? (string) $horse_age : '';
+                $horse_sex = is_scalar($horse_sex) ? (string) $horse_sex : '';
+                $horse_hair = is_scalar($horse_hair) ? (string) $horse_hair : '';
+                $horse_price = is_scalar($horse_price) ? (string) $horse_price : '';
+                $star_number = is_scalar($star_number) ? (int) $star_number : 0;
 
                 echo "<div class='font-family-card card-wrapper " .
                     ($horse_status ? "selling " : "no-sell ") .

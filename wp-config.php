@@ -227,6 +227,27 @@ if (!defined('WP_ENVIRONMENT_TYPE')) {
   // LOCAL - 'local' pour le développement local
   define('WP_ENVIRONMENT_TYPE', 'local');
 }
+
+// Forcer HTTP en local (désactiver la détection automatique HTTPS)
+if (!defined('FORCE_SSL_ADMIN')) {
+  define('FORCE_SSL_ADMIN', false);
+}
+
+// Désactiver la détection automatique HTTPS pour les URLs
+if (!defined('FORCE_SSL')) {
+  define('FORCE_SSL', false);
+}
+
+// Forcer WordPress à utiliser HTTP au lieu de HTTPS en local
+if (WP_ENVIRONMENT_TYPE === 'local') {
+  // Désactiver la détection HTTPS via les en-têtes
+  $_SERVER['HTTPS'] = 'off';
+  
+  if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $_SERVER['HTTP_X_FORWARDED_PROTO'] = 'http';
+  }
+}
+
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
